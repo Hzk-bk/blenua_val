@@ -77,6 +77,13 @@
         min-height: 24px;
     }
 
+    #musicBtn {
+        margin-top: 15px;
+        background: #ffd1e8;
+        color: #e6005c;
+        font-size: 16px;
+    }
+
     .emoji {
         position: absolute;
         font-size: 22px;
@@ -93,6 +100,10 @@
 
 <body>
 
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9b5e5d7c4c.mp3" type="audio/mpeg">
+</audio>
+
 <div class="card" id="card">
     <h1>Keremela 😌💖</h1>
     <p>So… be honest.<br>Will you be my Valentine?</p>
@@ -101,18 +112,20 @@
     <button id="no" onclick="panicNo()">No 😒</button>
 
     <div id="reaction"></div>
+
+    <button id="musicBtn" onclick="playMusic()">Play music 🎶</button>
 </div>
 
 <script>
     const reactions = [
-        "Really? That’s your choice? 😌",
-        "Bold of you to try that.",
-        "We both know that’s not serious.",
-        "The audacity… honestly.",
-        "Okay but like… no.",
-        "That button is getting tired."
+        "Still pressing that? Interesting.",
+        "We talked about this.",
+        "That’s click number… regrettable.",
+        "You’re very committed to the wrong answer.",
+        "Okay, now you’re just testing fate."
     ];
 
+    let noClicks = 0;
     let noScale = 1;
     let yesScale = 1;
 
@@ -120,13 +133,14 @@
         const noBtn = document.getElementById("no");
         const reaction = document.getElementById("reaction");
 
-        reaction.innerText = reactions[Math.floor(Math.random() * reactions.length)];
+        reaction.innerText = reactions[Math.min(noClicks, reactions.length - 1)];
 
         const x = Math.random() * (window.innerWidth - 120);
         const y = Math.random() * (window.innerHeight - 120);
 
-        noScale -= 0.12;
-        yesScale += 0.1;
+        noClicks++;
+        noScale -= 0.08;
+        yesScale += 0.08;
 
         noBtn.style.left = x + "px";
         noBtn.style.top = y + "px";
@@ -135,9 +149,9 @@
 
         document.getElementById("yes").style.transform = `scale(${yesScale})`;
 
-        if (noScale <= 0.25) {
+        if (noClicks >= 5) {
             noBtn.style.display = "none";
-            reaction.innerText = "Yeah… that option has been removed 😌💖";
+            reaction.innerText = "Okay yeah… that option is officially retired 😌💖";
         }
     }
 
@@ -149,10 +163,10 @@
                 Happy Valentine’s Day, Keremela 💕
             </p>
         `;
-        launchEmojis();
+        startEmojis();
     }
 
-    function launchEmojis() {
+    function startEmojis() {
         setInterval(() => {
             const e = document.createElement("div");
             e.className = "emoji";
@@ -162,6 +176,12 @@
             document.body.appendChild(e);
             setTimeout(() => e.remove(), 10000);
         }, 250);
+    }
+
+    function playMusic() {
+        const music = document.getElementById("bgMusic");
+        music.play();
+        document.getElementById("musicBtn").style.display = "none";
     }
 </script>
 
