@@ -2,187 +2,133 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Keremela 😌💖</title>
+<title>Keremela 💗</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #ffd1ff, #cdb4db);
-        background-size: 400% 400%;
-        animation: gradientBG 12s ease infinite;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Segoe UI', sans-serif;
-        overflow: hidden;
-    }
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+      radial-gradient(circle at top left, #ffd6e8, transparent 60%),
+      radial-gradient(circle at bottom right, #cdb4db, transparent 60%),
+      linear-gradient(135deg, #fff1f7, #fbeaff);
+    font-family: 'Inter', sans-serif;
+  }
 
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
+  .card {
+    background: rgba(255,255,255,0.9);
+    backdrop-filter: blur(10px);
+    padding: 50px 60px;
+    border-radius: 28px;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.18);
+    text-align: center;
+    max-width: 440px;
+    position: relative;
+  }
 
-    .card {
-        background: white;
-        padding: 50px;
-        border-radius: 30px;
-        box-shadow: 0 25px 60px rgba(0,0,0,0.25);
-        text-align: center;
-        max-width: 420px;
-        position: relative;
-        z-index: 2;
-    }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    color: #b1005a;
+    margin-bottom: 15px;
+  }
 
-    h1 {
-        color: #e6005c;
-        font-size: 30px;
-        margin-bottom: 15px;
-    }
+  p {
+    font-size: 18px;
+    color: #444;
+    margin-bottom: 35px;
+  }
 
-    p {
-        color: #444;
-        font-size: 18px;
-        margin-bottom: 30px;
-    }
+  button {
+    font-size: 18px;
+    padding: 14px 34px;
+    border-radius: 14px;
+    border: none;
+    cursor: pointer;
+    margin: 12px;
+    transition: all 0.25s ease;
+  }
 
-    button {
-        font-size: 18px;
-        padding: 14px 30px;
-        border-radius: 14px;
-        border: none;
-        cursor: pointer;
-        margin: 10px;
-        transition: all 0.25s ease;
-        position: relative;
-    }
+  #yes {
+    background: linear-gradient(135deg, #ff4d88, #ff80aa);
+    color: white;
+    box-shadow: 0 10px 25px rgba(255,77,136,0.4);
+  }
 
-    #yes {
-        background: #ff4d88;
-        color: white;
-        box-shadow: 0 8px 20px rgba(255,77,136,0.4);
-    }
+  #no {
+    background: #f0f0f0;
+    color: #666;
+  }
 
-    #no {
-        background: #eee;
-        color: #555;
-        position: absolute;
-    }
-
-    #reaction {
-        margin-top: 25px;
-        font-size: 18px;
-        color: #e6005c;
-        min-height: 24px;
-    }
-
-    #musicBtn {
-        margin-top: 15px;
-        background: #ffd1e8;
-        color: #e6005c;
-        font-size: 16px;
-    }
-
-    .emoji {
-        position: absolute;
-        font-size: 22px;
-        animation: float 8s linear infinite;
-        opacity: 0.8;
-    }
-
-    @keyframes float {
-        from { transform: translateY(100vh); }
-        to { transform: translateY(-100vh); }
-    }
+  #reaction {
+    margin-top: 25px;
+    font-size: 17px;
+    font-weight: 600;
+    color: #b1005a;
+    min-height: 24px;
+  }
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9b5e5d7c4c.mp3" type="audio/mpeg">
-</audio>
-
 <div class="card" id="card">
-    <h1>Keremela 😌💖</h1>
-    <p>So… be honest.<br>Will you be my Valentine?</p>
+  <h1>Keremela 💗</h1>
+  <p>So tell me… honestly.<br>Will you be my Valentine?</p>
 
-    <button id="yes" onclick="sayYes()">Yes, obviously 💕</button>
-    <button id="no" onclick="panicNo()">No 😒</button>
+  <button id="yes" onclick="sayYes()">Yes 💖</button>
+  <button id="no" onclick="shrinkNo()">No 🙄</button>
 
-    <div id="reaction"></div>
-
-    <button id="musicBtn" onclick="playMusic()">Play music 🎶</button>
+  <div id="reaction"></div>
 </div>
 
 <script>
-    const reactions = [
-        "Still pressing that? Interesting.",
-        "We talked about this.",
-        "That’s click number… regrettable.",
-        "You’re very committed to the wrong answer.",
-        "Okay, now you’re just testing fate."
-    ];
+  const jokes = [
+    "Oh wow. Brave choice.",
+    "That button still works? Weird.",
+    "Are you enjoying this?",
+    "This is getting embarrassing for the button.",
+    "At this point it’s just denial.",
+    "The button is tired.",
+    "Okay but… why though?",
+    "You’re really committed to the wrong answer.",
+    "I respect the persistence. Not the choice."
+  ];
 
-    let noClicks = 0;
-    let noScale = 1;
-    let yesScale = 1;
+  let noScale = 1;
+  let yesScale = 1;
+  let clicks = 0;
 
-    function panicNo() {
-        const noBtn = document.getElementById("no");
-        const reaction = document.getElementById("reaction");
+  function shrinkNo() {
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const reaction = document.getElementById("reaction");
 
-        reaction.innerText = reactions[Math.min(noClicks, reactions.length - 1)];
+    reaction.innerText = jokes[Math.min(clicks, jokes.length - 1)];
 
-        const x = Math.random() * (window.innerWidth - 120);
-        const y = Math.random() * (window.innerHeight - 120);
+    noScale = Math.max(0.35, noScale - 0.06);   // never disappears
+    yesScale += 0.05;
 
-        noClicks++;
-        noScale -= 0.08;
-        yesScale += 0.08;
+    noBtn.style.transform = `scale(${noScale})`;
+    yesBtn.style.transform = `scale(${yesScale})`;
 
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-        noBtn.style.transform = `scale(${noScale}) rotate(${Math.random() * 360}deg)`;
-        noBtn.style.opacity = noScale;
+    clicks++;
+  }
 
-        document.getElementById("yes").style.transform = `scale(${yesScale})`;
-
-        if (noClicks >= 5) {
-            noBtn.style.display = "none";
-            reaction.innerText = "Okay yeah… that option is officially retired 😌💖";
-        }
-    }
-
-    function sayYes() {
-        document.getElementById("card").innerHTML = `
-            <h1>AS EXPECTED 💖</h1>
-            <p style="font-size:22px;color:#e6005c;">
-                You made the correct decision 😌<br><br>
-                Happy Valentine’s Day, Keremela 💕
-            </p>
-        `;
-        startEmojis();
-    }
-
-    function startEmojis() {
-        setInterval(() => {
-            const e = document.createElement("div");
-            e.className = "emoji";
-            e.innerText = ["💖","💘","✨","🥰","💕"][Math.floor(Math.random()*5)];
-            e.style.left = Math.random() * window.innerWidth + "px";
-            e.style.animationDuration = (5 + Math.random() * 5) + "s";
-            document.body.appendChild(e);
-            setTimeout(() => e.remove(), 10000);
-        }, 250);
-    }
-
-    function playMusic() {
-        const music = document.getElementById("bgMusic");
-        music.play();
-        document.getElementById("musicBtn").style.display = "none";
-    }
+  function sayYes() {
+    document.getElementById("card").innerHTML = `
+      <h1>As you should 💖</h1>
+      <p style="font-size:22px;color:#b1005a;">
+        Excellent decision 😌<br><br>
+        Happy Valentine’s Day, Keremela 💕
+      </p>
+    `;
+  }
 </script>
 
 </body>
