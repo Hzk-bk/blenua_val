@@ -28,7 +28,6 @@
     box-shadow: 0 30px 70px rgba(0,0,0,0.18);
     text-align: center;
     max-width: 440px;
-    position: relative;
   }
 
   h1 {
@@ -66,11 +65,19 @@
   }
 
   #reaction {
-    margin-top: 25px;
+    margin-top: 22px;
     font-size: 17px;
     font-weight: 600;
     color: #b1005a;
-    min-height: 24px;
+    min-height: 26px;
+  }
+
+  #audacity {
+    margin-top: 8px;
+    font-size: 15px;
+    color: #8a0045;
+    font-style: italic;
+    display: none;
   }
 </style>
 </head>
@@ -85,6 +92,7 @@
   <button id="no" onclick="shrinkNo()">No 🙄</button>
 
   <div id="reaction"></div>
+  <div id="audacity">The audacity to keep pressing that… impressive, honestly 😌</div>
 </div>
 
 <script>
@@ -95,9 +103,7 @@
     "This is getting embarrassing for the button.",
     "At this point it’s just denial.",
     "The button is tired.",
-    "Okay but… why though?",
-    "You’re really committed to the wrong answer.",
-    "I respect the persistence. Not the choice."
+    "Okay but… why though?"
   ];
 
   let noScale = 1;
@@ -108,10 +114,16 @@
     const noBtn = document.getElementById("no");
     const yesBtn = document.getElementById("yes");
     const reaction = document.getElementById("reaction");
+    const audacity = document.getElementById("audacity");
 
     reaction.innerText = jokes[Math.min(clicks, jokes.length - 1)];
 
-    noScale = Math.max(0.35, noScale - 0.06);   // never disappears
+    // 👀 AUDACITY UNLOCKS AFTER 2 CLICKS
+    if (clicks >= 2) {
+      audacity.style.display = "block";
+    }
+
+    noScale = Math.max(0.35, noScale - 0.06); // never disappears
     yesScale += 0.05;
 
     noBtn.style.transform = `scale(${noScale})`;
